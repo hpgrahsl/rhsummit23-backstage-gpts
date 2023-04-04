@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: ${{values.repoName}}
+  name: ${{values.namespace}}-${{values.component_id}}-dev
   {%- if values.description %}
   description: ${{values.description}}
   {%- endif %}
