@@ -1,0 +1,16 @@
+{{- with .Values.service }}
+apiVersion: v1
+kind: Service
+metadata:
+  #name: {{ include "quarkus-template.fullname" $ }}
+  name: ${{values.component_id}}
+  labels:
+    {{- include "quarkus-template.labels" $ | nindent 4 }}
+spec:
+  type: {{ .type }}
+  ports:
+    - port: {{ .port }}
+      protocol: TCP
+  selector:
+    {{- include "quarkus-template.selectorLabels" $ | nindent 4 }}
+{{- end }}
