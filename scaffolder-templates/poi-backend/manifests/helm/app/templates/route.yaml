@@ -1,0 +1,26 @@
+{{- with .Values.route }}
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  #name: {{ include "quarkus-template.fullname" $ }}
+  name: ${{values.component_id}}
+  labels:
+    {{- include "quarkus-template.labels" $ | nindent 4 }}
+  # annotations:
+  #   "helm.sh/hook": post-install,post-upgrade  
+spec:
+  {{- if .host }}
+  host: {{ .host }}
+  {{- end }}
+  {{- if .path }}
+  path: {{ .path }}
+  {{- end }}
+  port:
+    targetPort: {{ $.Values.service.port }}
+  to:
+    kind: Service
+    #name: {{ include "quarkus-template.fullname" $ }}
+    name: ${{values.component_id}}
+    weight: 100
+  wildcardPolicy: None
+{{- end }}

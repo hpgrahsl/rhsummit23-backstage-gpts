@@ -7,3 +7,4 @@ spec:
   type: url
   targets:
     - https://github.com/hpgrahsl/rhsummit23-backstage-gpts/blob/main/scaffolder-templates/poi-gateway/template.yaml
+    - https://github.com/hpgrahsl/rhsummit23-backstage-gpts/blob/main/scaffolder-templates/poi-backend/template.yaml
