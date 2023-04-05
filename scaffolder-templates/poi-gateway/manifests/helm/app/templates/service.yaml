@@ -2,8 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  #name: {{ include "quarkus-template.fullname" $ }}
-  name: ${{values.component_id}}
+  name: {{ $.Values.app.componentId }}
   labels:
     {{- include "quarkus-template.labels" $ | nindent 4 }}
 spec:

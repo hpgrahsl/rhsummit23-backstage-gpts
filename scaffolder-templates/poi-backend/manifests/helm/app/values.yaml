@@ -2,9 +2,12 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+app:
+  componentId: ${{values.component_id}}
+
 namespace:
   enabled: true
-  name: ${{values.component_id}}
+  name: ${{values.namespace}}
   argocd:
     name: default
 

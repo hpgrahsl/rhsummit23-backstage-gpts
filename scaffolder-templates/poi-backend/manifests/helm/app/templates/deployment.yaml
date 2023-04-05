@@ -1,10 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "quarkus-template.fullname" . }}
+  name: {{ .Values.app.componentId }}
+  annotations:
+    app.openshift.io/connects-to: '[{"apiVersion":"apps/v1","kind":"Deployment","name":"poi-database"}]'
   labels:
     {{- include "backstage.labels" . | nindent 4 }}
     {{- include "quarkus-template.labels" . | nindent 4 }}
+    app.kubernetes.io/part-of: idp-workshop-app
+    app.openshift.io/runtime: quarkus
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
