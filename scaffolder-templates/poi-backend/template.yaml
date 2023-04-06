@@ -150,7 +150,7 @@ spec:
       action: argocd:create-resources
       input:
         appName: ${{parameters.namespace}}-${{parameters.component_id}}-bootstrap
-        argoInstance: main
+        argoInstance: argoInstance1
         namespace: assemble-argocd
         repoUrl: https://github.com/${{parameters.githubOrg}}/${{parameters.repoName}}-gitops.git
         path: 'argocd/'
