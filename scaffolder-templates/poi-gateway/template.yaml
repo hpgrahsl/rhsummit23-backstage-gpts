@@ -151,7 +151,7 @@ spec:
       input:
         appName: ${{parameters.namespace}}-${{parameters.component_id}}-bootstrap
         argoInstance: argoInstance1
-        namespace: assemble-argocd
+        namespace: janus-argocd
         repoUrl: https://github.com/${{parameters.githubOrg}}/${{parameters.repoName}}-gitops.git
         path: 'argocd/'
   output:
