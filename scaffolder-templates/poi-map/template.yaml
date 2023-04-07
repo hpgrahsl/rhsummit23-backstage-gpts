@@ -44,7 +44,7 @@ spec:
           title: Cluster Id
           type: string
           description: Id of the cluster
-          default: .apps.cluster-2w7cf.2w7cf.sandbox1883.opentlc.com
+          default: .apps.cluster-mh5sz.mh5sz.sandbox3033.opentlc.com
         namespace: 
           title: Namespace
           type: string
@@ -149,8 +149,8 @@ spec:
       action: argocd:create-resources
       input:
         appName: ${{parameters.namespace}}-${{parameters.component_id}}-bootstrap
-        argoInstance: argoInstance1
-        namespace: assemble-argocd
+        argoInstance: main
+        namespace: janus-argocd
         repoUrl: https://github.com/${{parameters.githubOrg}}/${{parameters.repoName}}-gitops.git
         path: 'argocd/'
   output:
