@@ -45,7 +45,7 @@ spec:
           title: Cluster Id
           type: string
           description: Id of the cluster
-          default: .apps.cluster-mh5sz.mh5sz.sandbox3033.opentlc.com
+          default: .apps.summit23.0x74.p1.openshiftapps.com
         namespace: 
           title: Namespace
           type: string
@@ -74,9 +74,7 @@ spec:
         image_name:
           title: Image Name
           type: string
-          #?? how to use other field values or combinations in a default value for a field??
-          #e.g. ${{parameters.namespace}}/${{parameters.component_id}}
-          default: <NAMESPACE>/<COMPONENT_ID>
+          default: <NAMESPACE>/poi-backend-app
           description: Image name to use for storing in the internal registry
         image_tag:
           title: Image Tag
