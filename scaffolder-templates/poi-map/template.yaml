@@ -53,12 +53,10 @@ spec:
           title: Owner
           type: string
           description: Owner of the component
-          default: rhdeveloper-workshop-authors
           ui:field: OwnerPicker
           ui:options:
             catalogFilter:
-              - Group
-              - User
+              kind: [User]
     - title: Provide Build Information
       required:
         - image_host
