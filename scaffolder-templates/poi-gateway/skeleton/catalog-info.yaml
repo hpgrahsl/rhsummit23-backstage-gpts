@@ -28,3 +28,17 @@ spec:
   type: service
   lifecycle: production
   owner: ${{values.owner | dump}}
+  system: workshop-system-${{values.namespace}}
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: workshop-system-${{values.namespace}}
+  tags:
+    - backstage
+    - janus-idp
+    - openshift
+    - workshop
+    - rh-summit
+spec:
+  owner: ${{values.owner | dump}}
