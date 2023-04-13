@@ -18,7 +18,7 @@ metadata:
     - maven
     - workshop
   links:
-    - url: https://devspaces${{values.cluster_id}}/#https://github.com/${{values.githubOrg}}/${{values.repoName}}?che-editor=che-incubator/che-code/insiders&devfilePath=.devfile-vscode.yaml
+    - url: https://devspaces${{values.cluster_id}}/#https://github.com/${{values.githubOrg}}/${{values.repoName}}?che-editor=che-incubator/che-code/latest&devfilePath=.devfile-vscode.yaml
       title: CodeReady Workspaces (VS Code)
       icon: web
 spec:

@@ -17,11 +17,8 @@ metadata:
     - angular
     - workshop
   links:
-    - url: https://devspaces${{values.cluster_id}}/#https://github.com/${{values.githubOrg}}/${{values.repoName}}?che-editor=che-incubator/che-code/insiders&devfilePath=.devfile-vscode.yaml
+    - url: https://devspaces${{values.cluster_id}}/#https://github.com/${{values.githubOrg}}/${{values.repoName}}?che-editor=che-incubator/che-code/latest
       title: CodeReady Workspaces (VS Code)
-      icon: web
-    - url: https://devspaces${{values.cluster_id}}/#https://github.com/${{values.githubOrg}}/${{values.repoName}}?che-editor=che-incubator/che-idea/next&devfilePath=.devfile-intellij.yaml
-      title: CodeReady Workspaces (JetBrains IntelliJ)
       icon: web
 spec:
   type: service
