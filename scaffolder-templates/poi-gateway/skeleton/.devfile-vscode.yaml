@@ -6,7 +6,7 @@ attributes:
 components:
   - name: development-tooling
     container:
-      image: quay.io/devfile/universal-developer-image:ubi8-0e189d9
+      image: registry.redhat.io/devspaces/udi-rhel8:3.4
       env:
         - name: QUARKUS_HTTP_HOST
           value: 0.0.0.0
@@ -53,3 +53,10 @@ commands:
       group:
         kind: run
         isDefault: true
+  - id: fix-java-version
+    exec:
+      component: development-tooling
+      commandLine: 'rm -rf ${HOME}/.java/current/* && ln -s /usr/lib/jvm/java-17-openjdk/* ${HOME}/.java/current'
+events:
+  postStart:
+    - fix-java-version
