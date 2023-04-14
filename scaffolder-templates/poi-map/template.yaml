@@ -53,7 +53,7 @@ spec:
           title: Owner
           type: string
           description: Owner of the component
-          ui:field: OwnerPicker
+          ui:field: EntityPicker
           ui:options:
             catalogFilter:
               kind: [User]
