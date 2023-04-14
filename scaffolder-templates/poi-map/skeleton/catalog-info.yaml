@@ -18,7 +18,7 @@ metadata:
     - workshop
   links:
     - url: https://devspaces${{values.cluster_id}}/#https://github.com/${{values.githubOrg}}/${{values.repoName}}?che-editor=che-incubator/che-code/latest&devfilePath=.devfile-vscode.yaml
-      title: CodeReady Workspaces (VS Code)
+      title: OpenShift Dev Spaces (VS Code)
       icon: web
 spec:
   type: service
