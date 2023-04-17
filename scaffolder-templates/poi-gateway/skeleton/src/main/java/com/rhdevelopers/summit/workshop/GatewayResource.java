@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -47,15 +46,13 @@ public class GatewayResource {
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<PoiRecord> findAll(@QueryParam("service") String backendId,@DefaultValue("false") @QueryParam("legacyMode") boolean legacyMode) {
+    public List<PoiRecord> findAll(@QueryParam("service") String backendId) {
         var backendProxy = backendRegistry.getBackendForId(backendId);
         if (backendProxy == null) {
             Log.errorv("no backend with id {0} found in registry",backendId);
             return null;
         }
-        return legacyMode 
-            ? backendProxy.restClient().getAllDataLegacyFacade().readEntity(new GenericType<List<PoiRecord>>() {})
-            : backendProxy.restClient().getAllData().readEntity(new GenericType<List<PoiRecord>>() {});
+        return backendProxy.restClient().getAllData().readEntity(new GenericType<List<PoiRecord>>() {});
     }
 
 }

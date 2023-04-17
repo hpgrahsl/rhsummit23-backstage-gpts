@@ -40,9 +40,9 @@ public class BackendRegistry {
         var withFakeBackend = ConfigProvider.getConfig().getValue("fake.backend.registration", Boolean.class);
         if(withFakeBackend) {
             var fakeBackendEndpoint = ConfigProvider.getConfig().getValue("fake.backend.endpoint", String.class);
-            var identifier = new BackendIdentifier(FakeBackendResource.FAKE_BACKEND_INFO.id);
+            var identifier = new BackendIdentifier(SummitBackendResource.SUMMIT_BACKEND_INFO.id);
             Log.debugv("registering fake backend {0} with endpoint {1}",identifier,fakeBackendEndpoint);
-            this.registry.put(identifier,new BackendProxy(FakeBackendResource.FAKE_BACKEND_INFO,PoiRemoteService.createRestClient(fakeBackendEndpoint)));
+            this.registry.put(identifier,new BackendProxy(SummitBackendResource.SUMMIT_BACKEND_INFO,PoiRemoteService.createRestClient(fakeBackendEndpoint)));
         }
     }
 
