@@ -15,10 +15,6 @@ public interface PoiRemoteService {
     public Response getInfo();
 
     @GET
-    @Path("ws/data/all")
-    public Response getAllDataLegacyFacade();
-
-    @GET
     @Path("poi/find/all")
     public Response getAllData();
 
