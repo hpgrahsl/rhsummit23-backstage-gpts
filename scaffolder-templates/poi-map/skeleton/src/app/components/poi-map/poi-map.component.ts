@@ -97,6 +97,9 @@ export class PoiMapComponent implements AfterViewInit {
     console.log('📬 received gateway event for backend registration');
     console.log(JSON.stringify(gatewayEvent));
     const backendId = gatewayEvent.backendInfo.id;
+    if(this.backendRegistry[backendId] !== undefined) {
+      this.cleanUpMapLayerAndControls(backendId);
+    }
     this.backendRegistry[backendId] = gatewayEvent.backendInfo;
     console.log('📢 calling gateway service to fetch data from backend');
     this.gatewayService.getAll(backendId).subscribe((dataPoints) => {
@@ -104,9 +107,6 @@ export class PoiMapComponent implements AfterViewInit {
       console.log('➕ add 🗺️ and 🎮 for backend: ' + backendId);
       const backendLayer = createNewBackendLayer(dataPoints);
       this.poiMap.addLayer(backendLayer);
-      //NOTE: according to the docs the index may use any string for display naming incl. html tags for styling
-      //BUT issue with duplicate / same display names for different backends if used as identifier
-      //this.overlays[backendId]=backendLayer;
       this.overlays[this.backendRegistry[backendId].displayName] = backendLayer;
     });
   }
@@ -115,11 +115,11 @@ export class PoiMapComponent implements AfterViewInit {
     console.log('📬 received gateway event for backend de-registration');
     console.log(JSON.stringify(gatewayEvent));
     const backendId = gatewayEvent.backendInfo.id;
+    this.cleanUpMapLayerAndControls(backendId);
+  }
+
+  cleanUpMapLayerAndControls(backendId:string) {
     console.log('➖ remove 🗺️ and 🎮 for backend: ' + backendId);
-    //NOTE: according to the docs the index may use any string for display naming incl. html tags for styling
-    //BUT issue with duplicate / same display names for different backends if used as identifier
-    //this.poiMap.removeLayer(this.overlays[backendId]);
-    //delete this.overlays[backendId];
     this.poiMap.removeLayer(
       this.overlays[this.backendRegistry[backendId].displayName]
     );
