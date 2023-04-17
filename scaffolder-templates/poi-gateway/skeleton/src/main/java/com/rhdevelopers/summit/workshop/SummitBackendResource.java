@@ -24,7 +24,7 @@ public class SummitBackendResource {
 
     public static final Backend SUMMIT_BACKEND_INFO = new Backend(
         "summit-backend",
-        "Summit Backend",
+        "Red Hat Summit POI",
         new Coordinates(0.0, 0.0),
         4
     );
