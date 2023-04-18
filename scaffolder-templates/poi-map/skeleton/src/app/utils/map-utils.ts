@@ -39,7 +39,9 @@ export const createNewBackendLayer = (
   ): Layer =>  {
   const newLayer = markerClusterGroup();
   dataPoints.map(poi => {
-    const info = '<p>'+poi.name+'</p><ul><li>lat: '+poi.coordinates[0]+'</li><li>lon: '+poi.coordinates[1]+'</li></ul>';
+    var info = '<p><strong>'+poi.name+'</strong>';
+    info += (poi.description !== undefined && poi.description !== '') ? ('<br/><i>'+poi.description+'</i>') : '';
+    info += '</p><p>lat: '+poi.coordinates[0]+'<br/>lon: '+poi.coordinates[1]+'</p>';
     createDefaultMarker(info,poi.coordinates[0],poi.coordinates[1])
       .addTo(newLayer)
     }
