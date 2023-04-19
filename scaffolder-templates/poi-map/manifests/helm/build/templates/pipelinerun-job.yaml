@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: poi-map-pipeline-run-job
+  annotations:
+    argocd.argoproj.io/hook: PostSync 
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  selector: {}
+  template:
+    metadata:
+      name: poi-map-pipeline-run-job
+    spec:
+      containers:
+        - name: poi-map-pipeline-run-job
+          image: gcr.io/tekton-releases/dogfooding/tkn
+          command:
+          - /bin/sh
+          - -c
+          - |
+            tkn pipeline start poi-map-app-pipeline --use-param-defaults -w name=source-folder,claimName=poi-map-pvc
+          env:
+            - name: HOME
+              value: /tekton/home
+      restartPolicy: Never
+      serviceAccountName: pipeline
+      
