@@ -22,9 +22,11 @@ spec:
         githubOrg:
           title: GitHub Organization
           type: string
+          default: Summit23DevLab
         repoName:
           title: Repository Name
           type: string
+          default: <NAMESPACE>-gateway
         description:
           title: Description
           type: string
@@ -50,6 +52,7 @@ spec:
           title: Namespace
           type: string
           description: Namespace
+          default: <NAMESPACE>
         owner:
           title: Owner
           type: string
