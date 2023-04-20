@@ -97,7 +97,8 @@ export class PoiMapComponent implements AfterViewInit {
     console.log('📬 received gateway event for backend registration');
     console.log(JSON.stringify(gatewayEvent));
     const backendId = gatewayEvent.backendInfo.id;
-    if(this.backendRegistry[backendId] !== undefined) {
+    if(this.backendRegistry[backendId]) {
+      console.log('backendId '+backendId+ ' was previously registered in this map -> updating existing backendId');
       this.cleanUpMapLayerAndControls(backendId);
     }
     this.backendRegistry[backendId] = gatewayEvent.backendInfo;
@@ -115,7 +116,11 @@ export class PoiMapComponent implements AfterViewInit {
     console.log('📬 received gateway event for backend de-registration');
     console.log(JSON.stringify(gatewayEvent));
     const backendId = gatewayEvent.backendInfo.id;
-    this.cleanUpMapLayerAndControls(backendId);
+    if(this.backendRegistry[backendId]) {
+      this.cleanUpMapLayerAndControls(backendId);
+    } else {
+      console.log('backendId '+backendId+ ' is not registered anymore in this map -> skipping unregister event');
+    }
   }
 
   cleanUpMapLayerAndControls(backendId:string) {
