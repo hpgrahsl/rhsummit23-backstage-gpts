@@ -48,7 +48,7 @@ export class PoiMapComponent implements AfterViewInit {
     );
 
     this.baseLayers = {
-      colored: this.coloredLayer,
+      color: this.coloredLayer,
       grayscale: this.grayscaleLayer,
     };
 
