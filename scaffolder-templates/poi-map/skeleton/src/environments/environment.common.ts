@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
-    appTitle: window['env']['appTitle'] ||
+    mapTitle: window['env']['mapTitle'] ||
           'POI Map Visualizer (Backstage Workshop RH Summit 23 Edition)',
     mapAttribution: window['env']['mapAttribution'] || 
           'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
