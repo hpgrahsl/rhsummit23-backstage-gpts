@@ -34,7 +34,7 @@ public class SummitBackendResource {
     @PostConstruct
     void initializePoiRecords() {
         SUMMIT_POI_RECORDS.add(new PoiRecord("Red Hat Headquarters", "Raleigh,NC,USA", List.of(35.787743, -78.644257)));
-        SUMMIT_POI_RECORDS.add(new PoiRecord("Red Hat Summit","Bosten,MA,USA", List.of(42.361145, -71.057083)));
+        SUMMIT_POI_RECORDS.add(new PoiRecord("Red Hat Summit","Boston,MA,USA", List.of(42.361145, -71.057083)));
     }
 
     @GET
