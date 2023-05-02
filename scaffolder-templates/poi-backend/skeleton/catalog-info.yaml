@@ -52,7 +52,7 @@ apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
   name: parks-api-${{values.namespace}}
-  description: Workshop attendees API used to initialize and load parks data.
+  description: API surface used by workshop attendees to initialize and load parks data
   links:
     - url: http://${{values.component_id}}-${{values.namespace}}${{values.cluster_id}}/q/swagger-ui
       title: Swagger UI
