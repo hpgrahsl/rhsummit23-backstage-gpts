@@ -45,3 +45,21 @@ metadata:
     - rh-summit
 spec:
   owner: ${{values.owner | dump}}
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: poi-parks-api
+  description: Workshop attendees API used to initialize and load parks data.
+  # tags:
+  #   - ...
+  links:
+    - url: https://github.com/${{values.githubOrg}}/${{values.repoName}}/tree/main/src/main/resources/META-INF/openapi.yaml
+      title: API Spec
+      icon: code
+spec:
+  type: openapi
+  lifecycle: production
+  owner: ${{values.owner | dump}}
+  definition:
+    $text: https://github.com/${{values.githubOrg}}/${{values.repoName}}/tree/main/src/main/resources/META-INF/openapi.yaml
