@@ -32,6 +32,8 @@ spec:
   lifecycle: production
   owner: ${{values.owner | dump}}
   system: workshop-system-${{values.namespace}}
+  providesApis:
+    - parks-api-${{values.namespace}}
 ---
 apiVersion: backstage.io/v1alpha1
 kind: System
@@ -49,11 +51,12 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: poi-parks-api
+  name: parks-api-${{values.namespace}}
   description: Workshop attendees API used to initialize and load parks data.
-  # tags:
-  #   - ...
   links:
+    - url: http://${{values.component_id}}-${{values.namespace}}${{values.cluster_id}}/q/swagger-ui
+      title: Swagger UI
+      icon: web
     - url: https://github.com/${{values.githubOrg}}/${{values.repoName}}/tree/main/src/main/resources/META-INF/openapi.yaml
       title: API Spec
       icon: code

@@ -7,6 +7,11 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.0
+servers:
+  - url: http://${{values.component_id}}-${{values.namespace}}${{values.cluster_id}}/
+    description: (backstage component deployment)
+  - url: http://localhost:8080/
+    description: (localhost testing)
 paths:
   /ws/data/all:
     get:
