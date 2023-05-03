@@ -42,7 +42,6 @@ public class PoiService {
         if(poiParksAutoLoad) {
             Log.debug("auto-loading parks data");
             insertPresetPoiRecordsOfTypePark();
-            poiParksAutoLoad = true;
         }
     }
 
