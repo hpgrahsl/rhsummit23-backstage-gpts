@@ -31,6 +31,8 @@ spec:
   lifecycle: production
   owner: ${{values.owner | dump}}
   system: workshop-system-${{values.namespace}}
+  consumesApis:
+    - gateway-api-${{values.namespace}}
 ---
 apiVersion: backstage.io/v1alpha1
 kind: System
