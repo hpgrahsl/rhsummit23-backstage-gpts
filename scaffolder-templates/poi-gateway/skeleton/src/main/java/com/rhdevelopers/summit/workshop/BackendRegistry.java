@@ -1,14 +1,18 @@
 package com.rhdevelopers.summit.workshop;
 
+import java.time.Duration;
 import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.ws.rs.core.Response;
 
 import org.eclipse.microprofile.config.ConfigProvider;
 
 import io.quarkus.logging.Log;
+import io.smallrye.mutiny.Uni;
 
 @ApplicationScoped
 public class BackendRegistry {
@@ -43,6 +47,32 @@ public class BackendRegistry {
             var identifier = new BackendIdentifier(SummitBackendResource.SUMMIT_BACKEND_INFO.id);
             Log.debugv("registering fake backend {0} with endpoint {1}",identifier,fakeBackendEndpoint);
             this.registry.put(identifier,new BackendProxy(SummitBackendResource.SUMMIT_BACKEND_INFO,PoiRemoteService.createRestClient(fakeBackendEndpoint)));
+        }
+    }
+
+    @PostConstruct
+    public void autoRegisterParksBackend() {
+        var withParksBackend = ConfigProvider.getConfig().getValue("parks.backend.registration", Boolean.class);
+        if(withParksBackend) {
+            var identifier = new BackendIdentifier(ConfigProvider.getConfig().getValue("parks.backend.id", String.class));
+            var parksBackendEndpoint = ConfigProvider.getConfig().getValue("parks.backend.endpoint", String.class);
+            var restClient = PoiRemoteService.createRestClient(parksBackendEndpoint);
+            Uni<Response> backendPolling = Uni.createFrom().item(() -> {
+                                        Log.debugv("trying to auto-register parks backend {0} @ endpoint {1}",identifier,parksBackendEndpoint);
+                                        return restClient.getInfo();
+                                    })
+                                    .onFailure().retry()
+                                    .withBackOff(Duration.ofSeconds(2),Duration.ofSeconds(4))
+                                    .indefinitely();
+            backendPolling.subscribe().with(
+                    response -> {
+                        var backendInfo = response.readEntity(Backend.class);
+                        Log.debugv("retrieved backend info: {0}",backendInfo);
+                        registry.put(identifier, new BackendProxy(backendInfo,restClient));
+                        websocket.broadcastBackendChangeNotification(RegistryEventType.REGISTERED, backendInfo);
+                    },
+                    failure -> Log.errorv("unexpected error during auto-registration of backend with identifier {0} -> {1}",identifier,failure.getMessage())
+            );
         }
     }
 
