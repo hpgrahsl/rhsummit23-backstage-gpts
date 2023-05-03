@@ -64,5 +64,6 @@ spec:
   type: openapi
   lifecycle: production
   owner: ${{values.owner | dump}}
+  system: workshop-system-${{values.namespace}}
   definition:
     $text: https://github.com/${{values.githubOrg}}/${{values.repoName}}/tree/main/src/main/resources/META-INF/openapi.yaml
