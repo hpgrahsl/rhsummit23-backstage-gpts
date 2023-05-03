@@ -26,7 +26,7 @@ spec:
         repoName:
           title: Repository Name
           type: string
-          default: <NAMESPACE>-backend
+          default: NAMESPACE-backend
         description:
           title: Description
           type: string
@@ -52,7 +52,7 @@ spec:
           title: Namespace
           type: string
           description: Namespace
-          default: <NAMESPACE>
+          default: NAMESPACE
         owner:
           title: Owner
           type: string
@@ -75,7 +75,7 @@ spec:
         image_name:
           title: Image Name
           type: string
-          default: <NAMESPACE>/poi-backend-app
+          default: NAMESPACE/poi-backend-app
           description: Image name to use for storing in the internal registry
         image_tag:
           title: Image Tag
