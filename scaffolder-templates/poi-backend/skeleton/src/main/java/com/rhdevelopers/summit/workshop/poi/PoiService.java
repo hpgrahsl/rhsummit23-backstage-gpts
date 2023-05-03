@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -18,8 +19,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.quarkus.logging.Log;
+import io.quarkus.runtime.Startup;
 
-@ApplicationScoped
+@Startup
 public class PoiService {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
@@ -30,8 +32,25 @@ public class PoiService {
     @Inject
     PoiRepository poiRepository;
 
+    @ConfigProperty(name = "poi.parks.auto.load")
+    boolean poiParksAutoLoad;
+
+    boolean parksDataLoaded = false;
+
+    @PostConstruct
+    public void autoLoadParksData() {
+        if(poiParksAutoLoad) {
+            Log.debug("auto-loading parks data");
+            insertPresetPoiRecordsOfTypePark();
+        }
+    }
+
     @Transactional
     public int insertPresetPoiRecordsOfTypePark() {
+        if(parksDataLoaded) {
+            Log.debugv("parks data has already been initialized either automatically or manually");
+            return 0;
+        }
         Log.debugv("parsing parks data from file {0}", poiParksFile);
         try (InputStream inputStream = getClass().getResourceAsStream(poiParksFile);
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
@@ -48,6 +67,7 @@ public class PoiService {
                     .collect(Collectors.toList());
             Log.debugv("persist {0} poi record(s)", pois.size());
             poiRepository.persist(pois);
+            parksDataLoaded = true;
             return pois.size();
         } catch (IOException e) {
             throw new RuntimeException("failed to initialize parks data", e);
