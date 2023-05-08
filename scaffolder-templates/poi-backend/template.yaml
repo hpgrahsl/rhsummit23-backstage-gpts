@@ -159,8 +159,6 @@ spec:
         url: ${{steps.publishSource.output.remoteUrl}}
       - title: Pipeline status
         url: https://console-openshift-console${{parameters.cluster_id}}/dev-pipelines/ns/${{parameters.namespace}}/
-      - title: Deployment details
-        url: https://console-openshift-console${{parameters.cluster_id}}/k8s/ns/${{parameters.namespace}}/deployments/${{parameters.component_id}}
       - title: Open Component in catalog
         icon: catalog
         entityRef: ${{steps.registerSource.output.entityRef}}
