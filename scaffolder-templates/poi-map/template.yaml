@@ -143,15 +143,15 @@ spec:
         defaultBranch: main
         protectDefaultBranch: false
         repoVisibility: public
-    - id: createArgoResources
-      name: Create ArgoCD Resources
-      action: argocd:create-resources
-      input:
-        appName: ${{parameters.namespace}}-${{parameters.component_id}}-bootstrap
-        argoInstance: main
-        namespace: janus-argocd
-        repoUrl: https://github.com/${{parameters.githubOrg}}/${{parameters.repoName}}-gitops.git
-        path: 'argocd/'
+    # - id: createArgoResources
+    #   name: Create ArgoCD Resources
+    #   action: argocd:create-resources
+    #   input:
+    #     appName: ${{parameters.namespace}}-${{parameters.component_id}}-bootstrap
+    #     argoInstance: main
+    #     namespace: janus-argocd
+    #     repoUrl: https://github.com/${{parameters.githubOrg}}/${{parameters.repoName}}-gitops.git
+    #     path: 'argocd/'
   output:
     links:
       - title: Source Code Repository
